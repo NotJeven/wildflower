@@ -1,1 +1,6 @@
-# main game and logic loop
+#	Description:
+#		main game and logic loop
+#	Parents:
+#		minecraft:tick
+
+
