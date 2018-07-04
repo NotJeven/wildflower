@@ -3,4 +3,4 @@
 #	Parents:
 #		minecraft:tick
 
-
+execute if entity @a[tag=!playerInitialized] run function wildflower:initialize_player

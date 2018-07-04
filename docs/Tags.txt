@@ -1,0 +1,11 @@
+initialized
+	marks players that have be initialized into the game
+
+dead
+	marks players that have died
+
+inMatch
+	marks players as active members of a current game
+
+reset
+	marks players that need to be reset when they rejoin the server

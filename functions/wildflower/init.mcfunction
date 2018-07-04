@@ -4,6 +4,11 @@
 #	Parents:
 #		wildflower:load
 
+# objective 
+# var dummy defined in wildflower:load
+scoreboard objectives add sinceDeath stat.timeSinceDeath
+
+
 # teams
 team add aqua Aqua
 team option aqua color aqua
