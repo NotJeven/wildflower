@@ -9,3 +9,10 @@ inMatch
 
 reset
 	marks players that need to be reset when they rejoin the server
+
+needBow
+	marks if a player needs to be given a bow
+needArrow
+	marks if a player needs to be given an arrow
+needPot
+	marks if a player needs to be given a splash potiona
