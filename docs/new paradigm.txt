@@ -1,0 +1,11 @@
+new paradigm
+	
+	virtual players with scoreboard scores for variables (single objective "var")
+		made in a function file var
+		scoreboard players set #name var 8
+
+	game loop
+		calls to other functions
+		if statements
+			execute if score #something var matches 4..1 run
+			execute if score #something var = #name var run

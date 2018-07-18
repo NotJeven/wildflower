@@ -1,0 +1,8 @@
+to add
+	text and audio for countdown functions
+	team joining functions
+	team spectator
+	game start function
+
+to fix
+	nothing lol

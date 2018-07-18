@@ -1,6 +1,7 @@
 #	Description:
 #		handles a player when they respawn
-#		called by @a[score={sinceDeath=1..},tag=dead]
+#	Activator:
+#		@a[score={sinceDeath=1..},tag=dead]
 #	Parents:
 #		wildflower:update
 

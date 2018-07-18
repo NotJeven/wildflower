@@ -16,3 +16,8 @@ needArrow
 	marks if a player needs to be given an arrow
 needPot
 	marks if a player needs to be given a splash potiona
+
+menuRequest
+	marks if a player requests a menu
+menuTimeout
+	marks if a player getting the menu is timed out
