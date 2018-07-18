@@ -6,4 +6,4 @@
 
 scoreboard objectives add var dummy Variables
 execute unless score #initialized var matches 1 run function wildflower:init
-scoreboard players set #initialized var 1
+scoreboard players operation #initialized var = #TRUE var

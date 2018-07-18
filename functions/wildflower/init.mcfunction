@@ -7,9 +7,11 @@
 # objectives
 # "scoreboard objectives add var dummy" defined in wildflower:load
 scoreboard objectives add sinceDeath stat.timeSinceDeath
+
 scoreboard objectives add triggerTeamJoinAqua trigger
 scoreboard objectives add triggerTeamJoinPurple trigger
-
+scoreboard objectives add triggerTeamReady trigger
+scoreboard objectives add triggerTeamLeave trigger
 
 # constants
 scoreboard players set #IDLE var 0			# game state

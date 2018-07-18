@@ -5,4 +5,5 @@
 #	Parents:
 #		wildflower:update
 
+
 scoreboard players set @a[score={triggerTeamJoinPurple=1}] triggerTeamJoinPurple 0

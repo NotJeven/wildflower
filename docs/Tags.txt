@@ -21,3 +21,5 @@ menuRequest
 	marks if a player requests a menu
 menuTimeout
 	marks if a player getting the menu is timed out
+menuHidden
+	marks if the menu is hidden for this player
