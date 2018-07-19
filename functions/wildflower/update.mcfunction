@@ -14,9 +14,9 @@ tag @a[score={sinceDeath=0},tag=!dead] add dead
 execute if entity @a[score={sinceDeath=1..},tag=dead] run function wildflower:alive
 
 # Menu Requests
-tag @a[x=0.5,y=47,z=520,distance=0..1,tag=!menuRequest,tag=!menuTimeout] add menuRequest
-tag @a[x=0.5,y=47,z=520,distance=0..1,tag=menuRequest] add menuTimeout
-execute if entity @a[tag=menuRequest,tag=!menuHidden] run function wildflower:menu
+execute if score #menuHidden var = #FALSE var run tag @a[x=0.5,y=47,z=520.5,distance=0..1,tag=!menuRequest] add menuRequest
+tag @a[x=0.5,y=47,z=520.5,distance=0..1,tag=menuRequest] add menuTimeout
+execute if entity @a[x=0.5,y=47,z=520.5,distance=0..1,tag=menuRequest,tag=!menuHidden] run function wildflower:menu
 tag @a[x=0.5,y=47,z=520.5,distance=1..,tag=menuTimeout] remove menuTimeout
 
 # Menu actions
@@ -34,4 +34,3 @@ execute if score #gameState var = #COUNTDOWN var if score #teamReadyAqua var = #
 
 execute if score #gameState var = #COUNTDOWN var if score #gameCountdown var < #15SECONDS var run function wildflower:game_countdown_tick
 execute if score #gameState var = #COUNTDOWN var if score #gameCountdown var < #0 var run function wildflower:game_start
-

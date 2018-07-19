@@ -10,6 +10,8 @@ inMatch
 reset
 	marks players that need to be reset when they rejoin the server
 
+giveItems
+	marks a player to process by give_items
 needBow
 	marks if a player needs to be given a bow
 needArrow

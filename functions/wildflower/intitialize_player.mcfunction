@@ -17,5 +17,13 @@ title @a[tag=!initialized] subtitle [{"text":"Wildflower by Jeven","color":"gree
 title @a[tag=!initialized] title ""
 playsound minecraft:block.wooden_trapdoor.open master @a[tag=!initialized] ~ ~ ~ 2 1 1
 
+# move player
+teleport @a[tag=!initialized] 0.5 50.5 516.5 1 25
+spawnpoint @a[tag=!initialized] 0.5 50.5 516.5
+
+# give menu
+execute if score #menuHidden var = #FALSE var run tag @a[tag=!initialized] add menuRequest
+execute if entity @a[tag=menuRequest] run function wildflower:menu
+
 # set the player as inititialized 
 tag @a[tag=!initialized] add initialized

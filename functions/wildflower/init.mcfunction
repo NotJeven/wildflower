@@ -18,8 +18,11 @@ scoreboard players set #IDLE var 0			# game state
 scoreboard players set #COUNTDOWN var 1		# game state
 scoreboard players set #RUNNING	var 2		# game state
 scoreboard players set #END var 3			# game state
+
 scoreboard players set #READY var 1			# ready state
 scoreboard players set #NOTREADY var 0		# ready state
+scoreboard players set #TURNREADY var 11	# ready transition state	
+scoreboard players set #TURNNOTREADY var 10	# ready transition state
 
 scoreboard players set #TRUE var 1			# boolean
 scoreboard players set #FALSE var 0			# boolean
