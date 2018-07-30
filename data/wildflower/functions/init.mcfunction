@@ -8,10 +8,8 @@
 # "scoreboard objectives add var dummy" defined in wildflower:load
 scoreboard objectives add sinceDeath minecraft.custom:minecraft.time_since_death
 
-scoreboard objectives add triggerTeamJoinAqua trigger
-scoreboard objectives add triggerTeamJoinPurple trigger
+scoreboard objectives add triggerTeamJoin trigger
 scoreboard objectives add triggerTeamReady trigger
-scoreboard objectives add triggerTeamLeave trigger
 
 # constants
 # game states
