@@ -20,9 +20,9 @@ execute if entity @a[x=0.5,y=47,z=520.5,distance=0..1,tag=menuRequest,tag=!menuH
 tag @a[x=0.5,y=47,z=520.5,distance=1..,tag=menuTimeout] remove menuTimeout
 
 # Menu actions
-execute if entity @a[scores={triggerTeamJoinPurple=1}] run function wildflower:team_join_purple
-execute if entity @a[scores={triggerTeamJoinAqua=1}] run function wildflower:team_join_aqua
-execute if entity @a[scores={triggerTeamLeave=1}] run function wildflower:team_leave
+execute if entity @a[scores={triggerTeamJoin=-1}] run function wildflower:team_leave
+execute if entity @a[scores={triggerTeamJoin=1}] run function wildflower:team_join_purple
+execute if entity @a[scores={triggerTeamJoin=2}] run function wildflower:team_join_aqua
 execute if entity @a[scores={triggerTeamReady=1},team=aqua] run function wildflower:team_ready_aqua
 execute if entity @a[scores={triggerTeamReady=1},team=purple] run function wildflower:team_ready_purple
 
