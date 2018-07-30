@@ -17,5 +17,4 @@ tag @a[tag=giveItems,nbt=!{Inventory:[{id:"minecraft:arrow"}]}] add needArrow
 give @a[tag=giveItems,tag=needArrow] minecraft:arrow{display:{Name:"\"Arrow of Flight\"",Lore:["You move faster, but","lose footing quickly."]},AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:.4,Operation:1,UUIDMost:33760,UUIDLeast:123522,Slot:"mainhand"},{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Amount:-.1,Operation:1,UUIDMost:79170,UUIDLeast:178540,Slot:"mainhand"}]} 1
 tag @a[tag=giveItems,tag=needArrow] remove needArrow
 
-
-tag @[tag=giveItems] remove giveItems
+tag @a[tag=giveItems] remove giveItems
