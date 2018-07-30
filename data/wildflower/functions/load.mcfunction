@@ -4,6 +4,6 @@
 #	Parents:
 #		minecraft:load
 
-scoreboard objectives add var dummy Variables
+scoreboard objectives add var dummy "Variables"
 execute unless score #initialized var matches 1 run function wildflower:init
 scoreboard players operation #initialized var = #TRUE var

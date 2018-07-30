@@ -8,7 +8,7 @@
 
 # do a tick of feedback (sound, text) every second
 scoreboard players operation #gameCountdownSecond var = #gameCountdown var
-scoreboard players operation #gameCountdownSecond var % #1SECOND var
+scoreboard players operation #gameCountdownSecond var %= #1SECOND var
 execute if score #gameCountdownSecond var = #0 var run function wildflower:game_countdown_second
 
 # decrease the counter

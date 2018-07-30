@@ -19,7 +19,7 @@ playsound minecraft:block.wooden_trapdoor.open master @a[tag=!initialized] ~ ~ ~
 
 # move player
 teleport @a[tag=!initialized] 0.5 50.5 516.5 1 25
-spawnpoint @a[tag=!initialized] 0.5 50.5 516.5
+spawnpoint @a[tag=!initialized] 0 50 516
 
 # give menu
 execute if score #menuHidden var = #FALSE var run tag @a[tag=!initialized] add menuRequest

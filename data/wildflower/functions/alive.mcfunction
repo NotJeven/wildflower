@@ -7,11 +7,11 @@
 
 # effects
 effect give @a[tag=!initialized] minecraft:night_vision 99999 0 true
-effect give @a[tag=dead,score={sinceDeath=1..}] minecraft:regeneration 99999 0 true
-effect give @a[tag=dead,score={sinceDeath=1..}] minecraft:jump_boost 99999 2 true
+effect give @a[tag=dead,scores={sinceDeath=1..}] minecraft:regeneration 99999 0 true
+effect give @a[tag=dead,scores={sinceDeath=1..}] minecraft:jump_boost 99999 2 true
 
 # items
-tag @a[score={sinceDeath=1..},tag=dead] add giveItems
+tag @a[scores={sinceDeath=1..},tag=dead] add giveItems
 function wildflower:give_items
 
-tag @a[score={sinceDeath=1..},tag=dead] remove dead
+tag @a[scores={sinceDeath=1..},tag=dead] remove dead
