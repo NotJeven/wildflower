@@ -11,7 +11,7 @@ scoreboard objectives add sinceDeath minecraft.custom:minecraft.time_since_death
 scoreboard objectives add triggerTeamJoin trigger
 scoreboard objectives add triggerTeamReady trigger
 
-# constants
+# CONSTANTS
 # game states
 scoreboard players set #IDLE var 0
 scoreboard players set #COUNTDOWN var 1
@@ -32,18 +32,26 @@ scoreboard players set #FALSE var 0
 # time
 scoreboard players set #15SECONDS var 300
 scoreboard players set #1SECOND var 20
+scoreboard players set #30SECONDS var 600
+scoreboard players set #35SECONDS var 700
 
 # numbers
 scoreboard players set #1 var 1
 scoreboard players set #0 var 0
+# END CONSTANTS
+
+# things to be only defined once
+scoreboard players operation #gameCountdownSecond var = #1 var
+scoreboard players operation #menuHidden var = #FALSE var
+
 
 # teams
-team add aqua "Aqua"
+team add aqua "Wolfsbane"
 team modify aqua color aqua
-team modify aqua prefix "Aqua."
-team add purple "Purple"
+team modify aqua prefix "Wolfsbane."
+team add purple "Foxglove"
 team modify purple color light_purple
-team modify purple prefix "Purple."
+team modify purple prefix "Foxglove."
 
 # initializes/sets all the variables
 function wildflower:var_set

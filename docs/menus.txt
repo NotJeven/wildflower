@@ -1,0 +1,10 @@
+
+
+standard menu team=
+	[Team Options] Wolfsbane | Foxglove | Spectate
+
+standard menu team=!
+	[Team Options] Toggle Ready | Leave team
+
+admin menu
+	[Admin Options] Remove Admin | Toggle Menu | Random Teams | Force Ready | Reset Game

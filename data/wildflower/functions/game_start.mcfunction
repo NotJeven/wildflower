@@ -6,6 +6,10 @@
 #		wildflower:update
 
 
-tellraw <player> <raw json message>
-playsound <sound> <source> <player> [x] [y] [z] [volume] [pitch] [minimumVolume]
+tellraw @a {"translate":"wildflower.game.start"}
+playsound <sound> <source> @a [x] [y] [z] [volume] [pitch] [minimumVolume]
 scoreboard players operation #gameState var = #RUNNING var
+gamemode adventure @a[team=aqua]
+gamemode adventure @a[team=purple]
+spreadplayers 19.5 545.5 1 2 false @a[team=aqua]
+spreadplayers -18.5 545.5 1 2 false @a[team=purple]

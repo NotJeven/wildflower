@@ -5,7 +5,7 @@
 #	Parents:
 #		wildflower:update
 
-tellraw <player> <raw json message>
+tellraw @a {"translate":"wildflower.game.start.countdown"}
 playsound <sound> <source> <player> [x] [y] [z] [volume] [pitch] [minimumVolume]
 
 scoreboard players operation #gameState var = #COUNTDOWN var
