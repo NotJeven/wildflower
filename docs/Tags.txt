@@ -25,3 +25,5 @@ menuTimeout
 	marks if a player getting the menu is timed out
 menuAdmin
 	marks if a player is an admin
+menuAdminRemove
+	marks an admin to remove admin status
