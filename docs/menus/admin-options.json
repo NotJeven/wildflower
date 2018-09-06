@@ -4,7 +4,7 @@
 	},
 	{
 		"text":"Remove Admin",
-		"color":"light_gray",
+		"color":"gray",
 		"underlined":"true",
 		"clickEvent":
 		{
@@ -94,7 +94,7 @@
 	},
 	{
 		"text":"Reset Game",
-		"color":"purple",
+		"color":"light_purple",
 		"underlined":"true",
 		"clickEvent":
 		{
@@ -106,7 +106,5 @@
 			"action":"show_text",
 			"value":"Stop the game and reset."
 		}
-	},
-	
-
+	}
 ]

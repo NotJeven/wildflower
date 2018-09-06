@@ -40,7 +40,7 @@
 	},
 	{
 		"text":"Spectate",
-		"color":"light_gray",
+		"color":"gray",
 		"underlined":"true",
 		"clickEvent":
 		{
