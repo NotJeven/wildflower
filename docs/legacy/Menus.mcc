@@ -1,0 +1,390 @@
+// Name: Menus
+// Created: August 23, 2014 02:29
+// Author: Moesh
+// Purpose: To handle the menu system for Wildflower
+
+// menu 1 = Join blue
+// menu 2 = Join red
+// menu 3 = Join green
+// menu 4 = Tutorial
+// menu 5 = Join white (leave)
+// menu 6 = Ready toggle
+// menu 7 = Surrender
+
+// wfJoining entity
+summon Bat ~ ~0.5 ~ {CustomName:wfMenu,NoAI:1,Silent:1}
+
+
+// Clock
+setblock ~ ~ ~1 minecraft:wool 15
+fill ~ ~-1 ~ ~8 ~-1 ~ minecraft:redstone_block 0 replace minecraft:wool 15
+fill ~ ~1 ~ ~8 ~1 ~ minecraft:wool 15 replace minecraft:redstone_block
+
+// Menu activation
+scoreboard players set @a[rx=89,score_accessMenu_min=1] accessMenu 0
+
+testfor @a[m=1,rx=90,rxm=89,score_accessMenu=0,team=white]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=white] {"translate":"wf.menu.join","color":"light_purple","with":[{"translate":"wf.title"},{"translate":"wf.team.blue","color":"blue","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.join","with":[{"translate":"wf.team.blue"}]}},"clickEvent":{"action":"run_command","value":"/trigger menuLobby set 1"}},{"translate":"wf.team.red","color":"red","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.join","with":[{"translate":"wf.team.red"}]}},"clickEvent":{"action":"run_command","value":"/trigger menuLobby set 2"}},{"translate":"wf.team.green","color":"green","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.join","with":[{"translate":"wf.team.green"}]}},"clickEvent":{"action":"run_command","value":"/trigger menuLobby set 3"}},{"translate":"wf.menu.tutorial","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.tutorial"}},"clickEvent":{"action":"run_command","value":"/trigger menuLobby set 4"}}]}
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=white] {"text":"a game in progress."}
+	scoreboard players set @a[rx=90,rxm=89,score_accessMenu=0,team=white] accessMenu 1
+	
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool
+
+testfor @a[m=1,rx=90,rxm=89,score_accessMenu=0,team=blue]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=blue] {"translate":"wf.menu.team","color":"light_purple","with":[{"translate":"wf.title"},{"translate":"wf.menu.team.leave","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.leave"}},"clickEvent":{"action":"run_command","value":"/trigger menuTeam set 1"}},{"translate":"wf.menu.team.readytoggle","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.readytoggle"}},"clickEvent":{"action":"run_command","value":"/trigger menuTeam set 2"}}]}
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=blue] {"translate":"wf.menu.ingame","color":"light_purple","with":[{"translate":"wf.title"},{"translate":"wf.menu.surrender","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.surrender","with":[{"translate":"wf.team.blue"}]}},"clickEvent":{"action":"run_command","value":"/trigger menuIngame set 1"}}]}
+	scoreboard players set @a[rx=90,rxm=89,score_accessMenu=0,team=blue] accessMenu 1
+	
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 11
+
+testfor @a[m=1,rx=90,rxm=89,score_accessMenu=0,team=red]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=red] {"translate":"wf.menu.team","color":"light_purple","with":[{"translate":"wf.title"},{"translate":"wf.menu.team.leave","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.leave"}},"clickEvent":{"action":"run_command","value":"/trigger menuTeam set 1"}},{"translate":"wf.menu.team.readytoggle","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.readytoggle"}},"clickEvent":{"action":"run_command","value":"/trigger menuTeam set 2"}}]}
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=red] {"translate":"wf.menu.ingame","color":"light_purple","with":[{"translate":"wf.title"},{"translate":"wf.menu.surrender","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.surrender","with":[{"translate":"wf.team.blue"}]}},"clickEvent":{"action":"run_command","value":"/trigger menuIngame set 1"}}]}
+	scoreboard players set @a[rx=90,rxm=89,score_accessMenu=0,team=red] accessMenu 1
+	
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 14
+
+testfor @a[m=1,rx=90,rxm=89,score_accessMenu=0,team=green]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ tellraw @a[rx=90,rxm=89,score_accessMenu=0,team=green] {"translate":"wf.menu.team","color":"light_purple","with":[{"translate":"wf.title"},{"translate":"wf.menu.team.leave","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.leave"}},"clickEvent":{"action":"run_command","value":"/trigger menuTeam set 1"}},{"translate":"wf.menu.team.readytoggle","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.menu.description.readytoggle"}},"clickEvent":{"action":"run_command","value":"/trigger menuTeam set 2"}}]}
+	scoreboard players set @a[rx=90,rxm=89,score_accessMenu=0,team=green] accessMenu 1
+	
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool 5
+
+// Menu cooldown
+
+// wfCooldown entity
+summon Bat ~ ~0.5 ~ {CustomName:wfCooldown,NoAI:1,Silent:1}
+
+testfor @a[score_menuLobby_min=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+	execute @e[type=Bat,name=wfCooldown] ~ ~ ~ setblock ~6 ~ ~5 minecraft:redstone_block
+
+	
+testfor @a[score_menuTeam_min=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+	execute @e[type=Bat,name=wfCooldown] ~ ~ ~ setblock ~8 ~ ~5 minecraft:redstone_block
+
+	
+testfor @a[score_menuIngame_min=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+	execute @e[type=Bat,name=wfCooldown] ~ ~ ~ setblock ~10 ~ ~5 minecraft:redstone_block
+
+	
+	// Execute menu commands
+	
+	setblock ~ ~1 ~ minecraft:wool 15
+	fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+		scoreboard players set @a[score_menuLobby_min=1] handlingMenu 1
+		scoreboard players set @a[score_menuLobby_min=1,score_menuLobby=1,score_handlingMenu_min=1] join 2
+		scoreboard players set @a[score_menuLobby_min=2,score_menuLobby=2,score_handlingMenu_min=1] join 3
+		scoreboard players set @a[score_menuLobby_min=3,score_menuLobby=3,score_handlingMenu_min=1] join 4
+		execute @a[score_menuLobby_min=4,score_menuLobby=4,score_handlingMenu_min=1] ~ ~ ~ say Tutorial will be ran here somehow
+		scoreboard players set @a[score_menuLobby_min=1,score_handlingMenu_min=1] menuLobby 0
+		scoreboard players set @a[score_menuLobby_min=0,score_handlingMenu_min=1] handlingMenu 0
+		fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool
+
+	// MENU TEAM THINGER
+	setblock ~ ~1 ~ minecraft:wool 15
+	fill ~ ~ ~1 ~ ~ ~6 minecraft:redstone_block
+		scoreboard players set @a[score_menuTeam_min=1] handlingMenu 1
+		scoreboard players set @a[score_menuTeam_min=1,score_menuTeam=1,score_menuTeam=1,score_handlingMenu_min=1] join 1
+		scoreboard players set @a[score_menuTeam_min=1,score_handlingMenu_min=1,score_menuTeam=1] menuTeam 0
+		execute @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1,team=blue] ~ ~ ~ execute @e[type=Bat,name=wfReady] ~0 ~ ~2 fill ~ ~ ~ ~2 ~ ~ minecraft:redstone_block 0 replace minecraft:wool 15
+		execute @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1,team=red] ~ ~ ~ execute @e[type=Bat,name=wfReady] ~4 ~ ~2 fill ~ ~ ~ ~2 ~ ~ minecraft:redstone_block 0 replace minecraft:wool 15
+		execute @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1,team=green] ~ ~ ~ execute @e[type=Bat,name=wfReady] ~8 ~ ~2 fill ~ ~ ~ ~2 ~ ~ minecraft:redstone_block 0 replace minecraft:wool 15
+		scoreboard players set @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1,team=blue] enable 1
+		scoreboard players set @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1,team=red] enable 1
+		scoreboard players set @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1,team=green] enable 1
+		scoreboard players set @a[score_menuTeam_min=2,score_menuTeam=2,score_handlingMenu_min=1] menuTeam 0
+		fill ~ ~1 ~ ~ ~1 ~-5 minecraft:wool
+		scoreboard players set @a[score_menuTeam=0,score_handlingMenu_min=1] handlingMenu 0
+	
+
+	setblock ~ ~1 ~ minecraft:wool 15
+	fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+		scoreboard players set @a[score_menuIngame_min=1] handlingMenu 1
+		execute @a[score_menuIngame_min=1,score_menuIngame=1,score_handlingMenu_min=1,team=blue] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_surrenderBlue=0] ~ ~ ~ scoreboard players set @e[type=Bat,name=Wildflower] surrenderBlue 1
+		execute @a[score_menuIngame_min=1,score_menuIngame=1,score_handlingMenu_min=1,team=blue] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_surrenderBlue_min=1] ~ ~ ~ scoreboard players set @e[type=Bat,name=Wildflower] surrenderBlue 0
+		execute @a[score_menuIngame_min=1,score_menuIngame=1,score_handlingMenu_min=1,team=red] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_surrenderRed=0] ~ ~ ~ scoreboard players set @e[type=Bat,name=Wildflower] surrenderRed 1
+		execute @a[score_menuIngame_min=1,score_menuIngame=1,score_handlingMenu_min=1,team=red] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_surrenderRed_min=1] ~ ~ ~ scoreboard players set @e[type=Bat,name=Wildflower] surrenderRed 0
+		// Menu enable actions happen as result of playerstate or gamestate changing, not in these commands.
+		scoreboard players set @a[score_menuIngame_min=1,score_handlingMenu_min=1] menuIngame 0
+		scoreboard players set @a[score_menuIngame=0,score_handlingMenu_min=1] handlingMenu 0
+		fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool
+		
+		
+// Menu Enabler
+// Once a player runs a menu, they may get a new contextual menu. That menu
+// must be enabled and the previous one must be disabled. Separating this
+// functions allows the enabler to disable every menu and enable the proper one.
+// This will be useful to access later when changing gamestates.
+
+testfor @a[score_enable_min=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~7 minecraft:redstone_block
+	scoreboard players set @a[score_enable_min=1] handlingEnable 1
+	scoreboard players reset @a[score_handlingEnable_min=1,score_enable_min=1] menuLobby
+	scoreboard players reset @a[score_handlingEnable_min=1,score_enable_min=1] menuTeam
+	scoreboard players reset @a[score_handlingEnable_min=1,score_enable_min=1] menuJoin
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ scoreboard players enable @a[score_handlingEnable_min=1,score_enable_min=1,team=white] menuLobby
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ scoreboard players enable @a[score_handlingEnable_min=1,score_enable_min=1,team=red] menuTeam
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ scoreboard players enable @a[score_handlingEnable_min=1,score_enable_min=1,team=blue] menuTeam
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ scoreboard players enable @a[score_handlingEnable_min=1,score_enable_min=1,team=green] menuTeam
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ scoreboard players enable @a[score_handlingEnable_min=1,score_enable_min=1,team=red] menuIngame
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min1=0] ~ ~ ~ scoreboard players enable @a[score_handlingEnable_min=1,score_enable_min=1,team=blue] menuIngame
+	scoreboard players set @a[score_handlingEnable_min=1,score_enable_min=1] enable 0
+	scoreboard players set @a[score_handlingEnable_min=1,score_enable=0] handlingEnable 0
+	fill ~ ~1 ~ ~ ~1 ~-6 minecraft:wool
+	
+// wfReady Toggle effect
+// Call for toggle ready
+testfor @e[type=Bat,name=Wildflower,score_updateReady_min=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+
+
+
+// Ready up blue
+execute @e[type=Bat,name=Wildflower,score_readyBlue=0] ~ ~ ~ execute @e[type=Bat,name=wfReady] ~ ~ ~3 fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players set @e[type=Bat,name=Wildflower] readyBlue 1
+	execute @a[team=blue] ~ ~ ~ playsound wf.ready.blue @p[team=blue]
+	execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.ready.blue.all @p[team=!blue] ~ ~ ~ 60000000
+	tellraw @a {"translate":"wf.ready","color":"dark_green","with":[{"translate":"wf.team.blue","color":"blue"},{"translate":"wf.ready.ready","color":"green"}]}
+	scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1,score_readyRed_min=1,score_readyGreen_min=1] ~ ~ ~ execute @e[type=Bat,name=wfCountdown] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool 11
+	
+// Unready blue
+testforblock ~-2 ~ ~ minecraft:command_block 0 {SuccessCount:0}
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+blockdata ~ ~-1 ~-2 {SuccessCount:0}
+	fill ~ ~ ~1 ~ ~ ~3 minecraft:redstone_block
+		scoreboard players set @e[type=Bat,name=Wildflower] readyBlue 0
+		execute @a[team=blue] ~ ~ ~ playsound wf.unready.blue @p[team=blue]
+		execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.unready.blue.all @p[team=!blue] ~ ~ ~ 60000000
+		tellraw @a {"translate":"wf.ready","color":"dark_green","with":[{"translate":"wf.team.blue","color":"blue"},{"translate":"wf.ready.unready","color":"red"}]}
+		fill ~ ~1 ~ ~ ~1 ~-2 minecraft:wool 11
+		scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+	
+// Ready up red
+execute @e[type=Bat,name=Wildflower,score_readyRed=0] ~ ~ ~ execute @e[type=Bat,name=wfReady] ~4 ~ ~3 fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players set @e[type=Bat,name=Wildflower] readyRed 1
+	execute @a[team=red] ~ ~ ~ playsound wf.ready.red @p[team=red]
+	execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.ready.red.all @p[team=!red] ~ ~ ~ 60000000
+	tellraw @a {"translate":"wf.ready","color":"dark_green","with":[{"translate":"wf.team.red","color":"red"},{"translate":"wf.ready.ready","color":"green"}]}
+	scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1,score_readyRed_min=1,score_readyGreen_min=1] ~ ~ ~ execute @e[type=Bat,name=wfCountdown] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool 14
+	
+// Unready red
+testforblock ~-2 ~ ~ minecraft:command_block 0 {SuccessCount:0}
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+blockdata ~ ~-1 ~-2 {SuccessCount:0}
+	fill ~ ~ ~1 ~ ~ ~3 minecraft:redstone_block
+		scoreboard players set @e[type=Bat,name=Wildflower] readyRed 0
+		execute @a[team=red] ~ ~ ~ playsound wf.unready.red @p[team=red]
+		execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.unready.red.all @a[team=!red] ~ ~ ~ 60000000
+		tellraw @a {"translate":"wf.ready","color":"dark_green","with":[{"translate":"wf.team.red","color":"red"},{"translate":"wf.ready.unready","color":"red"}]}
+		fill ~ ~1 ~ ~ ~1 ~-2 minecraft:wool 11
+		scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+
+// Ready up green
+execute @e[type=Bat,name=Wildflower,score_readyGreen=0] ~ ~ ~ execute @e[type=Bat,name=wfReady] ~8 ~ ~3 fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players set @e[type=Bat,name=Wildflower] readyGreen 1
+	execute @a[team=green] ~ ~ ~ playsound wf.ready.green @p[team=green]
+	execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.ready.green.all @a[team=!green] ~ ~ ~ 60000000
+	tellraw @a {"translate":"wf.ready","color":"dark_green","with":[{"translate":"wf.team.green","color":"green"},{"translate":"wf.ready.ready","color":"green"}]}
+	scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1,score_readyRed_min=1,score_readyGreen_min=1] ~ ~ ~ execute @e[type=Bat,name=wfCountdown] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool 14
+
+// Unready green
+testforblock ~-2 ~ ~ minecraft:command_block 0 {SuccessCount:0}
+setblock ~ ~1 ~-1 minecraft:unpowegreen_comparator 2
+blockdata ~ ~-1 ~-2 {SuccessCount:0}
+	fill ~ ~ ~1 ~ ~ ~3 minecraft:redstone_block
+		scoreboard players set @e[type=Bat,name=Wildflower] readyGreen 0
+		execute @a[team=green] ~ ~ ~ playsound wf.unready.green @p[team=green]
+		execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.unready.green.all @p[team=!green] ~ ~ ~ 60000000
+		tellraw @a {"translate":"wf.ready","color":"dark_green","with":[{"translate":"wf.team.green","color":"green"},{"translate":"wf.ready.unready","color":"green"}]}
+		fill ~ ~1 ~ ~ ~1 ~-2 minecraft:wool 11
+		scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+	
+// menuLobby 1 = Join blue
+// menuLobby 2 = Join red
+// menuLobby 3 = Join green
+// menuLobby 4 = Tutorial
+
+
+// menuTeam 1 = Leave
+// menuTeam 2 = Ready toggle
+
+// menuIngame 1 = Surrender initiation
+
+
+// Wildflower: Leave, Ready team
+tellraw @a {
+	"translate":"wf.menu.team",
+	"color":"light_purple",
+	"with":[
+		{
+			"translate":"wf.title"
+		},
+		{
+			"translate":"wf.menu.team.leave",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.leave"
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuTeam set 1"
+			}
+		},
+		{
+			"translate":"wf.menu.team.readytoggle",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.readytoggle",
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuTeam set 2"
+			}
+		}
+	]
+}
+
+// Wildflower: Surrender
+tellraw @a {
+	"translate":"wf.menu.ingame",
+	"color":"light_purple",
+	"with":[
+		{
+			"translate":"wf.title"
+		},
+		{
+			"translate":"wf.menu.surrender",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.surrender",
+					"with":[
+						{
+							"translate":"wf.team.blue"
+						}
+					]
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuIngame set 1"
+			}
+		}
+	]
+}
+
+// Wildflower: Join (Wolfsbane, Foxglove, Spectators), Tutorial
+tellraw @a {
+	"translate":"wf.menu.join",
+	"color":"light_purple",
+	"with":[
+		{
+			"translate":"wf.title"
+		},
+		{
+			"translate":"wf.team.blue",
+			"color":"blue",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.join",
+					"with":[
+						{
+							"translate":"wf.team.blue"
+						}
+					]
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuLobby set 1"
+			}
+		},
+		{
+			"translate":"wf.team.red",
+			"color":"red",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.join",
+					"with":[
+						{
+							"translate":"wf.team.red"
+						}
+					]
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuLobby set 2"
+			}
+
+		},
+		{
+			"translate":"wf.team.green",
+			"color":"green",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.join",
+					"with":[
+						{
+							"translate":"wf.team.green"
+						}
+					]
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuLobby set 3"
+			}
+		},
+		{
+			"translate":"wf.menu.tutorial",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.menu.description.tutorial"
+				}
+			},
+			"clickEvent":{
+				"action":"run_command",
+				"value":"/trigger menuLobby set 4"
+			}
+		}
+	]
+}

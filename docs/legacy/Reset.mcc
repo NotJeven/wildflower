@@ -1,0 +1,61 @@
+// Name: Reset
+// Created: September 21, 2014
+// Author: Moesh
+// Purpose: Begin reset sequence
+
+// Bat
+summon Bat ~ ~0.5 ~ {CustomName:wfReset,NoAI:1,Silent:1}
+
+// Start reset clock
+setblock ~ ~1 ~2 minecraft:redstone_block
+
+// Countdown sequence setup
+setblock ~ ~1 ~ minecraft:wool 15
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players set @e[type=Bat,name=Wildflower] countdown 15
+	scoreboard players operation display countdown = @e[type=Bat,name=Wildflower] countdown
+	tellraw @a {"translate":"wf.reset.countdown","color":"dark_green","with":[{"score":{"name":"display","objective":"countdown"},"color":"red"}]}
+	execute @e[type=Bat,name=wfReset] ~2 ~ ~2 blockdata ~ ~ ~1 {Items:[]}
+	execute @e[type=Bat,name=wfReset] ~2 ~ ~2 blockdata ~ ~ ~ {TransferCooldown:17,Items:[{id:minecraft:wool,Count:1}]}
+	execute @e[type=Bat,name=wfReset] ~2 ~ ~2 setblock ~ ~1 ~ minecraft:wool 15
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool
+	
+// Countdown clock
+blockdata ~ ~1 ~-2 {TransferCooldown:10}
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players remove @e[type=Bat,name=Wildflower,score_countdown_min=1] countdown 1
+	scoreboard players operation display countdown = @e[type=Bat,name=Wildflower] countdown
+	execute @e[type=Bat,name=Wildflower,score_countdown_min=10,score_countdown=10] ~ ~ ~ tellraw @a {"translate":"wf.reset.countdown","color":"dark_green","with":[{"score":{"name":"display","objective":"countdown"},"color":"red"}]}
+	execute @e[type=Bat,name=Wildflower,score_countdown_min=5,score_countdown=5] ~ ~ ~ tellraw @a {"translate":"wf.reset.countdown","color":"dark_green","with":[{"score":{"name":"display","objective":"countdown"},"color":"red"}]}
+	execute @e[type=Bat,name=Wildflower,score_countdown=0] ~ ~ ~ execute @e[type=Bat,name=wfReset] ~2 ~ ~2 setblock ~ ~1 ~ minecraft:redstone_block
+	// THIS LINE SENDS TO THE RESET LINE!
+	execute @e[type=Bat,name=Wildflower,score_countdown=0] ~ ~ ~ execute @e[type=Bat,name=wfReset] ~ ~ ~ setblock ~4 ~ ~2 minecraft:redstone_block
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool
+	
+// The Reset Function
+// Lordy, lordy does this function ever scare me.
+setblock ~ ~1 ~ minecraft:wool 15
+fill ~ ~ ~1 ~ ~ ~10 minecraft:redstone_block
+	scoreboard players set @e[type=Bat,name=Wildflower] readyBlue 0
+	scoreboard players set @e[type=Bat,name=Wildflower] readyRed 0
+	scoreboard players set @e[type=Bat,name=Wildflower] readyGreen 0
+	scoreboard players set @e[type=Bat,name=Wildflower] gamestate 0
+	scoreboard players reset Starting displayLobby
+	scoreboard players set @e[type=Bat,name=Wildflower] updateDisplay 1
+	spreadplayers 0 500 1 5 false @a[team=blue]
+	spreadplayers 0 500 1 5 false @a[team=red]
+	gamemode adventure @a[team=blue]
+	gamemode adventure @a[team=red]
+	scoreboard players set @a[team=blue] join 1
+	scoreboard players set @a[team=red] join 1
+	scoreboard players set @a respawn 1
+	scoreboard objectives setdisplay sidebar.team.green displayLobby
+	spawnpoint @a 0 64 500
+	fill ~ ~1 ~ ~ ~1 ~-9 minecraft:wool
+	tellraw @a {"translate":"wf.reset","color":"dark_green"}
+	
+	
+
+
+
+

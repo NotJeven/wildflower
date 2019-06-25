@@ -1,0 +1,58 @@
+// Name: Display
+// Created:September 9, 2014 22:14
+// Author: Moesh
+// Purpose: To build and handle lobby and ingame sidebar displays.
+
+// This file works in conjunction with some editing magic using NBT Explorer.
+// The released map will now also include an edited scoreboard.dat file (found
+// within the data folder). This allows me to add prefix and suffixes to team
+// teams, which allows for fancy footwork display in the sidebar.
+
+/*
+	Game starts in [NAME IS THE NUMBER]
+	Wolfsbane: Ready -1
+	Foxglove: Ready -2
+	Spectators: Ready -3
+	[  SPACE  ] -4
+	Players: -5
+	playersWolfsbane -6
+	playersFoxglove -7
+	playersSpectators -8
+	playersLobby -9
+*/
+
+// Use these command to update displays
+scoreboard players set @e[type=Bat,name=Wildflower] display 1 // Update pregame display
+scoreboard players set @e[type=Bat,name=Wildflower] display 2 // Update ingame display(s)
+
+// wfSetup entity
+summon Bat ~ ~0.5 ~ {CustomName:wfDisplay,NoAI:1,Silent:1}
+kill @e[type=Bat,name=wfDisplay]
+
+// Does display need to be updated?
+testfor @e[type=Bat,name=Wildflower,score_display_min=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+
+
+// Update pregame lobby
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	// Update ready/unready display
+	execute @e[type=Bat,name=Wildflower,score_readyBlue=0] ~ ~ ~ scoreboard teams join unreadyBlue Wolfsblane
+	execute @e[type=Bat,name=Wildflower,score_readyRed=0] ~ ~ ~ scoreboard teams join unreadyRed Foxglove
+	execute @e[type=Bat,name=Wildflower,score_readyGreen=0] ~ ~ ~ scoreboard teams join unreadyGreen Spectators
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1] ~ ~ ~ scoreboard teams join readyBlue Wolfsblane
+	execute @e[type=Bat,name=Wildflower,score_readyRed_min=1] ~ ~ ~ scoreboard teams join readyRed Foxglove
+	execute @e[type=Bat,name=Wildflower,score_readyGreen_min=1] ~ ~ ~ scoreboard teams join readyGreen Spectators
+	
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool
+
+
+testfor @a[team=green]
+	scoreboard players set Spectators displayLobby -3
+	
+testforblock ~-2 ~ ~ minecraft:command_block 1
+scoreboard players reset Spectators displayLobby
+
+
+
+

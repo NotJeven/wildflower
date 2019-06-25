@@ -1,0 +1,131 @@
+// Name: Main Game Loop for Wildflower
+// Created: August 17, 2014 18:07PM
+// Author: Moesh
+// Purpose: To handle game start, inprogress, and win conditions for Wildflower
+
+
+/* Three game states:
+	0 - No game state (lobby, post-game)
+	1 - Ingame
+	2 - Post-game (stats display)
+*/
+
+/* Todo List
+	Set-up sequence
+	Game-start sequence
+	Team selection
+*/
+
+// wfSetup entity
+summon Bat ~ ~0.5 ~ {CustomName:wfPlayerLoader,NoAI:1,Silent:1}
+kill @e[type=Bat,name=wfPlayerLoader]
+
+// Hopper clock to handle first-player detection Pull up a cha
+setblock ~ ~-2 ~ minecraft:wool 15 // Restart hopper clock
+
+blockdata ~ ~1 ~-2 {TransferCooldown:0}
+	execute @a[-10,64,-10,dx=19,dy=3,dz=19] ~ ~ ~ execute @e[type=Bat,name=wfPlayerLoader] ~ ~ ~ setblock ~2 ~ ~2 minecraft:redstone_block // Detect first player
+
+// First player setup
+execute @a[-10,64,-10,dx=19,dy=3,dz=19] ~ ~ ~ execute @e[type=Bat,name=wfPlayerLoader] ~ ~ ~ setblock ~2 ~ ~2 minecraft:redstone_block
+
+fill ~ ~ ~1 ~ ~ ~6 minecraft:redstone_block
+	tellraw @a {"translate":"wf.setup.firstplayer","color":"green"}
+	execute @e[type=Bat,name=wfSetup] ~ ~ ~ fill ~ ~ ~2 ~10 ~ ~2 minecraft:redstone_block 0 replace wool 15 // Send to map setup
+	execute @e[type=Bat,name=wfPlayerLoader] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block // Disable first player-loaded clock
+	execute @e[type=Bat,name=wfPlayerLoader] ~ ~ ~ setblock ~4 ~ ~2 minecraft:redstone_block // Start player-handling
+	execute @e[type=Bat,name=wfPlayerLoader] ~ ~ ~ setblock ~2 ~ ~2 minecraft:wool 15 // Reset line
+	
+	fill ~ ~1 ~ ~ ~1 ~-5 minecraft:wool
+	
+// Player handling after first-player
+summon FallingSand ~ ~0.5 ~ {TileID:152}
+
+testfor @a[-10,64,-10,dx=19,dy=3,dz=19]
+	setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2 
+	execute @e[type=Bat,name=wfPlayerLoader] ~ ~ ~ setblock ~6 ~ ~4 minecraft:redstone_block // Send to player handling
+	
+// Check for gamestate
+//		Pull up a chair, I'm going to tell you a story of how execute allows me
+//		to take these lines and make it so I rarely have to handle split redstone
+//		logic ever. Well, actually, that's the story. 
+fill ~ ~ ~1 ~ ~ ~8 minecraft:redstone_block
+	scoreboard players set @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader=0] handlingLoader 1
+	effect @a[-10,64,-10,dx=19,dy=3,dz=19] minecraft:absorption 1 4 true
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ scoreboard players set @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader_min=1] join 1
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ scoreboard players set @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader_min=1] join 4
+	scoreboard players set @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader_min=1] respawn 1 // This also doubles as registering a player on the respawn scoreboard
+	scoreboard players set @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader_min=1] accessMenu 0
+	spawnpoint @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader_min=1] 0 64 500
+	tp @a[-10,64,-10,dx=19,dy=3,dz=19,score_handlingLoader_min=1] 0 64 500
+	title @a[-10,64,-10,rm=15,score_handlingLoader_min=1] title {"translate":"wf.title","color":"red"}
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ title @a[-10,64,-10,rm=15,score_handlingLoader_min=1] subtitle {"translate":"wf.title.by"}
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ title @a[-10,64,-10,rm=15,score_handlingLoader_min=1] subtitle {"translate":"wf.title.inprogress","color":"blue"}0
+	tellraw @a[-10,64,-10,rm=15,score_handlingLoader_min=1] {"translate":"wf.credits.map","color":"dark_green","with":[{"translate":"wf.title","color":"white"}]}
+	tellraw @a[-10,64,-10,rm=15,score_handlingLoader_min=1] {"translate":"wf.credits.authors","color":"dark_green","with":[{"text":"Moesh","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.credits.authors.hover"}},"clickEvent":{"action":"open_url","value":"http://lemoesh.com"}},{"text":"Rixiot","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.credits.authors.hover"}},"clickEvent":{"action":"open_url","value":"https://twitter.com/RixiotGhilitao"}},{"text":"Lapis_Lauri","color":"white","underlined":"true","hoverEvent":{"action":"show_text","value":{"translate":"wf.credits.authors.hover"}},"clickEvent":{"action":"open_url","value":"https://twitter.com/Lapis_Lauri"}}]}
+	tellraw @a[-10,64,-10,rm=15,score_handlingLoader_min=1] {"translate":"wf.credits.version","color":"dark_green","extra":[{"text":"Alpha","color":"white"}]}
+	scoreboard players set @a[-10,64,-10,rm=15,score_handlingLoader_min=1] handlingLoader 0
+	fill ~ ~1 ~ ~ ~1 ~-7 minecraft:wool
+
+
+// Authors tellraw
+tellraw @a[-10,64,-10,rm=15,score_handlingLoader_min=1] {
+	"translate":"wf.credits.authors",
+	"color":"dark_green",
+	"with":[
+		{
+			"text":"Moesh",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.credits.authors.hover"
+				}
+			},
+			"clickEvent":{
+				"action":"open_url",
+				"value":"http://lemoesh.com"
+			}
+		},
+		{
+			"text":"Rixiot",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.credits.authors.hover"
+				}
+			},
+			"clickEvent":{
+				"action":"open_url",
+				"value":"https://twitter.com/RixiotGhilitao"
+			}
+		},
+		{
+			"text":"Lapis_Lauri",
+			"color":"white",
+			"underlined":"true",
+			"hoverEvent":{
+				"action":"show_text",
+				"value":{
+					"translate":"wf.credits.authors.hover"
+				}
+			},
+			"clickEvent":{
+				"action":"open_url",
+				"value":"https://twitter.com/Lapis_Lauri"
+			}
+		}
+	]
+}
+
+
+
+
+
+
+
+
+

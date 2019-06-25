@@ -1,0 +1,45 @@
+// Name: Equip
+// Created: September 21, 2014 01:44PM
+// Author: Moesh
+// Purpose: To equip and requip players with bow and arrow when starting game
+//			and when players drop items.
+
+// wfEquip bat
+summon Bat ~ ~0.5 ~ {CustomName:wfEquip,NoAI:1,Silent:1}
+
+
+scoreboard players set @e[type=Item] droppedBow 1 {Item:{id:"minecraft:bow"}}
+scoreboard players set @e[type=Item] droppedArrow 1 {Item:{id:"minecraft:arrow"}}
+
+// Detected dropped items for players
+testfor @a[score_dropped_min=1]
+	setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+		fill ~ ~ ~1 ~ ~ ~6 minecraft:redstone_block
+			scoreboard players set @a[score_dropped_min=1] handlingDropped 1
+			scoreboard players set @e[type=Item] droppedBow 1 {Item:{id:"minecraft:bow"}}
+			scoreboard players set @e[type=Item] droppedArrow 1 {Item:{id:"minecraft:arrow"}}
+			execute @e[type=Item,score_droppedBow_min=1] ~ ~ ~ clear @a[score_dropped_min=1,score_handlingDropped_min=1,r=15] minecraft:bow
+			execute @e[type=Item,score_droppedBow_min=1] ~ ~ ~ give @a[score_dropped_min=1,score_handlingDropped_min=1,r=15] minecraft:bow 1 0 {ench:[{id:49,lvl:1},{id:51,lvl:1}],display:{Name:"Heavy Bow",Lore:["Packs a punch, but","you move slower."]},Unbreakable:1,AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:-0.2,Operation:1,UUIDMost:18208,UUIDLeast:171698}]}
+			execute @e[type=Item,score_droppedArrow_min=1] ~ ~ ~ clear @a[score_dropped_min=1,score_handlingDropped_min=1,r=15] minecraft:arrow
+			execute @e[type=Item,score_droppedArrow_min=1] ~ ~ ~ give @a[score_dropped_min=1,score_handlingDropped_min=1,r=15] minecraft:arrow 1 0 {display:{Name:"Arrow of Flight",Lore:["You move faster, but","lose footing quickly."]},AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:.4,Operation:1,UUIDMost:33760,UUIDLeast:123522},{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Amount:-.1,Operation:1,UUIDMost:79170,UUIDLeast:178540}]}
+			kill @e[type=Item,score_droppedBow_min=1]
+			kill @e[type=Item,score_droppedArrow_min=1]
+			scoreboard players set @a[score_dropped_min=1,score_handlingDropped_min=1] dropped 0
+			fill ~ ~1 ~ ~ ~1 ~-5 minecraft:wool
+			scoreboard players set @a[score_dropped=0,score_handlingDropped_min=1] handlingDropped 0
+
+// Equip players
+testfor @a[score_equip_min=1]
+	setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+		fill ~ ~ ~1 ~ ~ ~3 minecraft:redstone_block
+		scoreboard players set @a[score_equip_min=1] handlingEquip 1
+		give @a[score_equip_min=1,score_handlingEquip_min=1] minecraft:bow 1 0 {ench:[{id:49,lvl:1},{id:51,lvl:1}],display:{Name:"Heavy Bow",Lore:["Packs a punch, but","you move slower."]},Unbreakable:1,AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:-0.2,Operation:1,UUIDMost:18208,UUIDLeast:171698}]}
+		give @a[score_equip_min=1,score_handlingEquip_min=1] minecraft:arrow 1 0 {display:{Name:"Arrow of Flight",Lore:["You move faster, but","lose footing quickly."]},AttributeModifiers:[{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:.4,Operation:1,UUIDMost:33760,UUIDLeast:123522},{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Amount:-.1,Operation:1,UUIDMost:79170,UUIDLeast:178540}]}
+		scoreboard players set @a[score_equip_min=1,score_handlingEquip_min=1] equip 0
+		fill ~ ~1 ~ ~ ~1 ~-2 minecraft:wool
+		scoreboard players set @a[score_equip=0,score_handlingEquip_min=0] handlingEquip 0		
+		
+		
+		
+		
+		

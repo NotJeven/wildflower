@@ -1,0 +1,57 @@
+// Name: Lives
+// Created: September 21, 2014
+// Author: Moesh
+// Purpose: Handling player deaths ingame, sending requests to update scoreboard
+
+// Bat
+summon Bat ~ ~0.5 ~ {CustomName:wfLives,NoAI:1,Silent:1}
+
+// Player is dead, check remaining lives
+execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ testfor @a[score_health=0]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+	fill ~ ~ ~1 ~ ~ ~2 minecraft:redstone_block
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1,score_livesBlue_min=1] ~ ~ ~ scoreboard players set @a[score_health=0,team=blue,score_death=0] death 1
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1,score_livesRed_min=1] ~ ~ ~ scoreboard players set @a[score_health=0,team=red,score_death=0] death 1
+	fill ~ ~1 ~ ~ ~1 ~-1 minecraft:wool
+	
+// Player respawned, check lives, remove life or put player in spectator
+testfor @a[score_health_min=1,score_death_min=1,team=blue]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+	fill ~ ~ ~1 ~ ~ ~6 minecraft:redstone_block
+	scoreboard players set @p[score_health_min=1,score_death_min=1,team=blue] handlingLives 1
+	execute @e[type=Bat,name=Wildflower,score_livesBlue=0] ~ ~ ~ gamemode spectator @p[score_health_min=1,score_death_min=1,team=blue,score_handlingLives_min=1]
+	execute @e[type=Bat,name=Wildflower,score_livesBlue=0] ~ ~ ~ tellraw @p[score_health_min=1,score_death_min=1,team=blue,score_handlingLives_min=1] {"translate":"wf.outofgame"}
+	execute @e[type=Bat,name=Wildflower,score_livesBlue=0] ~ ~ ~ title subtitle @p[score_health_min=1,score_death_min=1,team=blue,score_handlingLives_min=1] {"translate":"wf.outofgame"}
+	execute @e[type=Bat,name=Wildflower,score_livesBlue=0] ~ ~ ~ title title @p[score_health_min=1,score_death_min=1,team=blue,score_handlingLives_min=1] {"text":""}
+	execute @e[type=Bat,name=Wildflower,score_livesBlue=0] ~ ~ ~ execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.outofgame @p[score_health_min=1,score_death_min=1,team=blue,score_handlingLives_min=1] ~ ~ ~ 60000000
+	execute @e[type=Bat,name=Wildflower,score_livesBlue_min=1] ~ ~ ~ scoreboard players remove @e[type=Bat,name=Wildflower] livesBlue 1
+	scoreboard players set @p[score_health_min=1,score_death_min=1,team=blue,score_handlingLives_min=1] death 0
+	scoreboard players set @p[score_health_min=1,score_death=0,team=blue,score_handlingLives_min=1] handlingLives 0
+	execute @e[type=Bat,name=Wildflower] ~ ~ ~ scoreboard players add @e[type=Bat,name=Wildflower] updateDisplay 1
+	fill ~ ~1 ~ ~ ~1 ~-5 minecraft:wool 11
+	
+// Test to see if any players are still alive on the
+execute @e[type=Bat,name=Wildflower,score_gamestate_min=1,score_livesBlue=0] ~ ~ ~ execute @e[type=Bat,name=wfLives] ~ ~ ~ setblock ~6 ~ ~5 minecraft:redstone_block
+	testfor @a[team=blue,m=2]
+	testforblock ~ ~1 ~-1 minecraft:command_block 0 {SuccessCount:0}
+		fill ~ ~ ~1 ~ ~ ~3 minecraft:redstone_block
+			scoreboard players set @e[type=Bat,name=Wildflower] gamestate 0
+			title @a title {"translate":"wf.team.red","color":"red"}
+			title @a subtitle {"translate":"wf.win.subtitle","color":"red"}
+			execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.win.red @a ~ ~ ~ 60000000
+			fill ~ ~1 ~ ~ ~1 ~-2 minecraft:wool
+			execute @e[type=Bat,name=wfReset] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block
+			
+execute @e[type=Bat,name=Wildflower,score_gamestate_min=1,score_livesRed=0] ~ ~ ~ execute @e[type=Bat,name=wfLives] ~ ~ ~ setblock ~8 ~ ~5 minecraft:redstone_block
+	testfor @a[team=red,m=2]
+	testforblock ~ ~1 ~-1 minecraft:command_block 0 {SuccessCount:0}
+		fill ~ ~ ~1 ~ ~ ~3 minecraft:redstone_block
+			scoreboard players set @e[type=Bat,name=Wildflower] gamestate 0
+			title @a title {"translate":"wf.team.blue","color":"blue"}
+			title @a subtitle {"translate":"wf.win.subtitle","color":"blue"}
+			execute @e[type=Bat,name=Wildflower] ~ ~ ~ playsound wf.win.blue @a ~ ~ ~ 60000000
+			fill ~ ~1 ~ ~ ~1 ~-2 minecraft:wool
+			execute @e[type=Bat,name=wfReset] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block
+
+
+	

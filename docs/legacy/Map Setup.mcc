@@ -1,0 +1,99 @@
+// Name: Map Setup
+// Created: August 21, 2014 18:07
+// Author: Moesh
+// Purpose: To set-up all map objectives, teams, gamerules, and clocks
+
+// wfSetup entity
+summon Bat ~ ~0.5 ~ {CustomName:wfSetup,NoAI:1,Silent:1}
+kill @e[type=Bat,name=wfSetup]
+
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ fill ~ ~ ~2 ~12 ~ ~2 minecraft:redstone_block 0 replace wool 15	// Everything*
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~ ~ ~2 minecraft:redstone_block		// Gamerules
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~2 ~ ~2 minecraft:redstone_block		// Other map options
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~4 ~ ~2 minecraft:redstone_block		// Teams
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~6 ~ ~2 minecraft:redstone_block		// Team options
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~8 ~ ~2 minecraft:redstone_block		// Objectives
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~10 ~ ~2 minecraft:redstone_block		// Objectives
+execute @e[type=Bat,name=wfSetup] ~ ~ ~ setblock ~12 ~ ~2 minecraft:redstone_block		// Default values for entities
+
+// Gamerules
+setblock ~ ~1 ~ minecraft:wool 15
+fill ~ ~ ~1 ~ ~ ~8 minecraft:redstone_block
+	gamerule commandBlockOutput false
+	gamerule doDaylightCycle false
+	gamerule doFireTick false
+	gamerule doMobLoot false
+	gamerule doMobSpawning false
+	gamerule doTileDrops false
+	gamerule keepInventory true
+	tellraw @a {"text":"- ","color":"dark_green","extra":[{"translate":"wf.setup.gamerules"}]}
+	
+	gamerule mobGriefing false
+	gamerule naturalRegeneration true
+	gamerule logAdminCommands false
+	gamerule randomTickSpeed 3
+	gamerule reducedDebugInfo true
+	gamerule sendCommandFeedback false
+	gamerule showDeathMessages true
+	fill ~ ~1 ~ ~ ~1 ~-7 minecraft:wool
+
+// Other map settings
+setblock ~ ~1 ~ minecraft:wool 15
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	time set 18000
+	weather clear 999999
+	defaultgamemode adventure
+	difficulty peaceful
+	tellraw @a {"text":"- ","color":"dark_green","extra":[{"translate":"wf.setup.mapsettings"}]}
+	
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool
+	
+// Teams
+setblock ~ ~1 ~ minecraft:wool 15
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	scoreboard teams add blue Wolfsbane
+	scoreboard teams add red Foxglove
+	scoreboard teams add green Spectators
+	scoreboard teams add white Lobby
+	tellraw @a {"text":"- ","color":"dark_green","extra":[{"translate":"wf.setup.teams"}]}
+	
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool
+
+// Team options
+setblock ~ ~1 ~ minecraft:wool 15
+fill ~ ~ ~1 ~ ~ ~9 minecraft:redstone_block
+	scoreboard teams option blue color blue
+	scoreboard teams option red color red
+	scoreboard teams option green color green
+	scoreboard teams option white friendlyfire false
+	scoreboard teams option blue seeFriendlyInvisibles true
+	scoreboard teams option red seeFriendlyInvisibles true
+	scoreboard teams option blue nametagVisibility hideForOtherTeams
+	scoreboard teams option red nametagVisibility hideForOtherTeams
+	tellraw @a {"text":"- ","color":"dark_green","extra":[{"translate":"wf.setup.teams.options"}]}
+	
+	fill ~ ~1 ~ ~ ~1 ~-8 minecraft:wool
+	
+// Objectives
+
+
+	scoreboard objectives add health health Health
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

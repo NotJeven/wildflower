@@ -1,0 +1,65 @@
+// Name: Respawn
+// Created: August 22, 2014 18:00
+// Author: Moesh
+// Purpose: To handle players death and respawn
+
+// wfRespawn entity
+summon Bat ~ ~0.5 ~ {CustomName:wfRespawn,NoAI:1,Silent:1}
+
+// Clock
+setblock ~ ~ ~1 minecraft:wool 15
+fill ~ ~-1 ~ ~8 ~-1 ~ minecraft:redstone_block 0 replace minecraft:wool 15
+fill ~ ~1 ~ ~8 ~1 ~ minecraft:wool 15 replace minecraft:redstone_block
+
+
+// Player is dead, assign respawn objective
+scoreboard players set @a[score_health=0,score_respawn=0] respawn 1
+
+// Player is dead and on white team
+testfor @a[score_health_min=1,score_respawn_min=1,team=white]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2 // Make this a 1RS tick clock
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=white] handlingRespawn 1
+	effect @a[score_health_min=1,score_respawn_min=1,team=white,score_handlingRespawn_min=1] minecraft:weakness 999999 255 true
+	effect @a[score_health_min=1,score_respawn_min=1,team=white,score_handlingRespawn_min=1] minecraft:regeneration 999999 0 true
+	effect @a[score_health_min=1,score_respawn_min=1,team=white,score_handlingRespawn_min=1] minecraft:saturation 999999 0 true
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=white,score_handlingRespawn_min=1] respawn 0
+	scoreboard players set @a[score_health_min=1,score_respawn=0,team=white,score_handlingRespawn_min=1] handlingRespawn 0
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool
+	
+// Player is dead and on blue team
+testfor @a[score_health_min=1,score_respawn_min=1,team=blue]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2 // Make this a 1RS tick clock
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=blue] handlingRespawn 1
+	effect @a[score_health_min=1,score_respawn_min=1,team=blue,score_handlingRespawn_min=1] minecraft:weakness 999999 255 true
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ effect @a[score_health_min=1,score_respawn_min=1,team=blue,score_handlingRespawn_min=1] minecraft:regeneration 999999 0 true
+	effect @a[score_health_min=1,score_respawn_min=1,team=blue,score_handlingRespawn_min=1] minecraft:saturation 999999 0 true
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ clear @a[score_health_min=1,score_respawn_min=1,team=blue,score_handlingRespawn_min=1] minecraft:potion
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ give @a[score_health_min=1,score_respawn_min=1,team=blue,score_handlingRespawn_min=1] minecraft:potion 1 16421 {AttributeModifiers:[{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Amount:1,Operation:1,UUIDMost:67569,UUIDLeast:148201},{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:-.5,Operation:1,UUIDMost:65508,UUIDLeast:183756},{AttributeName:"generic.maxHealth",Name:"generic.maxHealth",Amount:10,Operation:0,UUIDMost:42390,UUIDLeast:153897}],display:{Name:"Splash Healing Potion of Snowballing II"}}
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=blue,score_handlingRespawn_min=1] respawn 0
+	scoreboard players set @a[score_health_min=1,score_respawn=0,team=blue,score_handlingRespawn_min=1] handlingRespawn 0
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 11
+
+// Player is dead and on red team
+testfor @a[score_health_min=1,score_respawn_min=1,team=red]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2 // Make this a 1RS tick clock
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=red] handlingRespawn 1
+	effect @a[score_health_min=1,score_respawn_min=1,team=red,score_handlingRespawn_min=1] minecraft:weakness 999999 255 true
+	execute @e[type=Bat,name=Wildflower,score_gamestate=0] ~ ~ ~ effect @a[score_health_min=1,score_respawn_min=1,team=red,score_handlingRespawn_min=1] minecraft:regeneration 999999 0 true
+	effect @a[score_health_min=1,score_respawn_min=1,team=red,score_handlingRespawn_min=1] minecraft:saturation 999999 0 true
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ clear @a[score_health_min=1,score_respawn_min=1,team=red,score_handlingRespawn_min=1] minecraft:potion
+	execute @e[type=Bat,name=Wildflower,score_gamestate_min=1] ~ ~ ~ give @a[score_health_min=1,score_respawn_min=1,team=red,score_handlingRespawn_min=1] minecraft:potion 1 16421 {AttributeModifiers:[{AttributeName:"generic.knockbackResistance",Name:"generic.knockbackResistance",Amount:1,Operation:1,UUIDMost:67569,UUIDLeast:148201},{AttributeName:"generic.movementSpeed",Name:"generic.movementSpeed",Amount:-.5,Operation:1,UUIDMost:65508,UUIDLeast:183756},{AttributeName:"generic.maxHealth",Name:"generic.maxHealth",Amount:10,Operation:0,UUIDMost:42390,UUIDLeast:153897}],display:{Name:"Splash Healing Potion of Snowballing II"}}
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=red,score_handlingRespawn_min=1] respawn 0
+	scoreboard players set @a[score_health_min=1,score_respawn=0,team=red,score_handlingRespawn_min=1] handlingRespawn 0
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 14
+	
+// Player is dead and on green team
+testfor @a[score_health_min=1,score_respawn_min=1,team=green]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2 // Make this a 1RS tick clock
+fill ~ ~ ~1 ~ ~ ~4 minecraft:redstone_block
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=green] handlingRespawn 1
+	scoreboard players set @a[score_health_min=1,score_respawn_min=1,team=green,score_handlingRespawn_min=1] respawn 0
+	scoreboard players set @a[score_health_min=1,score_respawn=0,team=green,score_handlingRespawn_min=1] handlingRespawn 0
+	fill ~ ~1 ~ ~ ~1 ~-3 minecraft:wool 5

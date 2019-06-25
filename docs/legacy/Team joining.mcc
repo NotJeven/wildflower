@@ -1,0 +1,76 @@
+// Name: Respawn
+// Created: August 23, 2014 02:29
+// Author: Moesh
+// Purpose: To handle players joining teams
+
+// wfJoining entity
+summon Bat ~ ~0.5 ~ {CustomName:wfJoining,NoAI:1,Silent:1}
+
+// Clock
+setblock ~ ~ ~1 minecraft:wool 15
+fill ~ ~-1 ~ ~8 ~-1 ~ minecraft:redstone_block 0 replace minecraft:wool 15
+fill ~ ~1 ~ ~8 ~1 ~ minecraft:wool 15 replace minecraft:redstone_block
+
+
+// Join white team
+testfor @a[score_join_min=1,score_join=1]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~6 minecraft:redstone_block
+	scoreboard players set @a[score_join_min=1,score_join=1] handlingJoin 1
+	execute @a[score_join_min=1,score_handlingJoin_min=1,team=blue] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1] ~ ~ ~ execute @e[type=Bat,name=wfReadyFunc] ~ ~ ~ setblock ~2 ~ ~2 minecraft:redstone_block
+	execute @a[score_join_min=1,score_handlingJoin_min=1,team=red] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_readyRed_min=1] ~ ~ ~ execute @e[type=Bat,name=wfReadyFunc] ~ ~ ~ setblock ~6 ~ ~2 minecraft:redstone_block
+	execute @a[score_join_min=1,score_handlingJoin_min=1,team=green] ~ ~ ~ execute @e[type=Bat,name=Wildflower,score_readyGreen_min=1] ~ ~ ~ execute @e[type=Bat,name=wfReadyFunc] ~ ~ ~ setblock ~10 ~ ~2 minecraft:redstone_block
+	scoreboard teams join white @a[score_join_min=1,score_join=1,score_handlingJoin_min=1]
+	gamemode adventure @a[score_join_min=1,score_join=1,score_handlingJoin_min=1,m=3]
+	clear @a[score_join_min=1,score_join=1,score_handlingJoin_min=1]
+	tellraw @a[score_join_min=1,score_join=1,score_handlingJoin_min=1] {"translate":"wf.join","color":"light_purple",extra:[{"translate":"wf.team.white","color":"white"}]}
+	scoreboard players set @a[score_join_min=1,score_join=1,score_handlingJoin_min=1] enable 1
+	scoreboard players set @a[score_join_min=1,score_join=1,score_handlingJoin_min=1] join 0
+	fill ~ ~1 ~ ~ ~1 ~-5 minecraft:wool
+	scoreboard players set @a[score_join=0,score_handlingJoin_min=1] handlingJoin 0
+
+	
+// Join blue team
+testfor @a[score_join_min=2,score_join=2]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	scoreboard players set @a[score_join_min=2,score_join=2] handlingJoin 1
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1] ~ ~ ~ execute @e[type=Bat,name=wfReadyFunc] ~ ~ ~ setblock ~2 ~ ~2 minecraft:redstone_block
+	scoreboard teams join blue @a[score_join_min=2,score_join=2,score_handlingJoin_min=1]
+	gamemode adventure @a[score_join_min=2,score_join=2,score_handlingJoin_min=1,m=3]
+	clear @a[score_join_min=2,score_join=2,score_handlingJoin_min=1]
+	tellraw @a[score_join_min=2,score_join=2,score_handlingJoin_min=1] {"translate":"wf.join","color":"light_purple",with:[{"translate":"wf.team.blue","color":"blue"}]}
+	scoreboard players set @a[score_join_min=2,score_join=2,score_handlingJoin_min=1] enable 1
+	scoreboard players set @a[score_join_min=2,score_join=2,score_handlingJoin_min=1] join 0
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 11
+	scoreboard players set @a[score_join=0,score_handlingJoin_min=1] handlingJoin 0
+
+// Join red team
+testfor @a[score_join_min=3,score_join=3]
+setblock ~ ~1 ~-1 minecraft:unpowered_comparator 2
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	scoreboard players set @a[score_join_min=3,score_join=3] handlingJoin 1
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1] ~ ~ ~ execute @e[type=Bat,name=wfReadyFunc] ~ ~ ~ setblock ~6 ~ ~2 minecraft:redstone_block
+	scoreboard teams join red @a[score_join_min=3,score_join=3,score_handlingJoin_min=1]
+	gamemode adventure @a[score_join_min=3,score_join=3,score_handlingJoin_min=1,m=3]
+	clear @a[score_join_min=3,score_join=3,score_handlingJoin_min=1]
+	tellraw @a[score_join_min=3,score_join=3,score_handlingJoin_min=1] {"translate":"wf.join","color":"light_purple",with:[{"translate":"wf.team.red","color":"red"}]}
+	scoreboard players set @a[score_join_min=3,score_join=3,score_handlingJoin_min=1] enable 1
+	scoreboard players set @a[score_join_min=3,score_join=3,score_handlingJoin_min=1] join 0
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 14
+	scoreboard players set @a[score_join=0,score_handlingJoin_min=1] handlingJoin 0
+	
+// Join green team
+testfor @a[score_join_min=4,score_join=4]
+setblock ~ ~1 ~-1 minecraft:unpowegreen_comparator 2
+fill ~ ~ ~1 ~ ~ ~5 minecraft:redstone_block
+	scoreboard players set @a[score_join_min=4,score_join=4] handlingJoin 1
+	execute @e[type=Bat,name=Wildflower,score_readyBlue_min=1] ~ ~ ~ execute @e[type=Bat,name=wfReadyFunc] ~ ~ ~ setblock ~10 ~ ~2 minecraft:redstone_block
+	scoreboard teams join green @a[score_join_min=4,score_join=4,score_handlingJoin_min=1]
+	gamemode spectator @a[score_join_min=4,score_join=4,score_handlingJoin_min=1]
+	clear @a[score_join_min=4,score_join=4,score_handlingJoin_min=1]
+	tellraw @a[score_join_min=4,score_join=4,score_handlingJoin_min=1] {"translate":"wf.join","color":"light_purple",with:[{"translate":"wf.team.green","color":"green"}]}
+	scoreboard players set @a[score_join_min=4,score_join=4,score_handlingJoin_min=1] enable 1
+	scoreboard players set @a[score_join_min=4,score_join=4,score_handlingJoin_min=1] join 0
+	fill ~ ~1 ~ ~ ~1 ~-4 minecraft:wool 5
+	scoreboard players set @a[score_join=0,score_handlingJoin_min=1] handlingJoin 0
