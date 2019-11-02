@@ -8,7 +8,7 @@
 execute if score #livesPurple var = #0 var run tellraw @a {"translate":"wildflower.game.end.aqua"}
 execute if score #livesAqua var = #0 var run tellraw @a {"translate":"wildflower.game.end.purple"}
 
-playsound <sound> <source> @a [x] [y] [z] [volume] [pitch] [minimumVolume]
+#playsound <sound> <source> @a [x] [y] [z] [volume] [pitch] [minimumVolume]
 
 tag @a[tag=menuAdmin] add menuRequest
 function widlfower:menu_admin

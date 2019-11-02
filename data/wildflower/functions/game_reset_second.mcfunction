@@ -5,5 +5,5 @@
 #	Parents:
 #		wildflower:game_reset_tick
 
-playsound <sound> <source> <player> [x] [y] [z] [volume] [pitch] [minimumVolume]
-tellraw <player> <raw json message>
+#playsound <sound> <source> <player> [x] [y] [z] [volume] [pitch] [minimumVolume]
+#tellraw <player> <raw json message>
