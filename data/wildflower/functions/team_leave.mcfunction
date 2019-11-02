@@ -14,7 +14,7 @@ clear @a[scores={triggerTeamJoin=-1}]
 tellraw @a[scores={triggerTeamJoin=-1}] [{"text":"Left team."}]
 title @a[scores={triggerTeamJoin=-1}] subtitle [{"text":"Left team."}]
 title @a[scores={triggerTeamJoin=-1}] title ""
-playsound <sound> <source> @a[scores={triggerTeamJoin=-1}] [x] [y] [z] [volume] [pitch] [minimumVolume]
+#playsound <sound> <source> @a[scores={triggerTeamJoin=-1}] [x] [y] [z] [volume] [pitch] [minimumVolume]
 
 # menu
 execute if score #menuHidden var = #FALSE var run tag @a[scores={triggerTeamJoin=-1}] add menuRequest

@@ -7,7 +7,7 @@
 
 
 tellraw @a {"translate":"wildflower.game.start"}
-playsound <sound> <source> @a [x] [y] [z] [volume] [pitch] [minimumVolume]
+#playsound <sound> <source> @a [x] [y] [z] [volume] [pitch] [minimumVolume]
 scoreboard players operation #gameState var = #RUNNING var
 gamemode adventure @a[team=aqua]
 gamemode adventure @a[team=purple]

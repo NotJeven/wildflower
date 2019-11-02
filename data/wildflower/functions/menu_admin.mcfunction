@@ -8,6 +8,6 @@
 #		wildflower:update
 
 tellraw @a[tag=menuRequest,tag=menuAdmin] {"translate":"wildflower.menu.admin"}
-playsound @a[tag=menuRequest,tag=menuAdmin]
+#playsound @a[tag=menuRequest,tag=menuAdmin]
 
 tag @a[tag=menuRequest,tag=menuAdmin] remove menuRequest

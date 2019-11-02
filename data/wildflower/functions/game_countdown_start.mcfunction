@@ -6,7 +6,7 @@
 #		wildflower:update
 
 tellraw @a {"translate":"wildflower.game.start.countdown"}
-playsound <sound> <source> <player> [x] [y] [z] [volume] [pitch] [minimumVolume]
+#playsound <sound> <source> <player> [x] [y] [z] [volume] [pitch] [minimumVolume]
 
 scoreboard players operation #gameState var = #COUNTDOWN var
 

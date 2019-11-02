@@ -15,7 +15,7 @@ tellraw @a[tag=menuRequest,team=!] [{"text":"[Team Options] "},{"text":"Wolfsban
 # enable triggers
 scoreboard players enable @a[tag=menuRequest,team=!] triggerTeamJoin
 scoreboard players enable @a[tag=menuRequest] triggerTeamReady
-playsound @a[tag=menuRequest,tag=!menuAdmin]
+#playsound @a[tag=menuRequest,tag=!menuAdmin]
 
 function wildflower:menu_admin
 # reset
