@@ -14,11 +14,13 @@ execute if score #teamReadyAqua var = #TURNREADY var run tellraw @a[scores={trig
 execute if score #teamReadyAqua var = #TURNREADY var run title @a[scores={triggerTeamReady=1},team=aqua] subtitle [{"text":"Ready aqua"}]
 execute if score #teamReadyAqua var = #TURNREADY var run title @a[scores={triggerTeamReady=1},team=aqua] title ""
 execute if score #teamReadyAqua var = #TURNREADY var run playsound entity.horse.armor master @a[scores={triggerTeamReady=1},team=aqua] ~ ~ ~ 1 1 1
+execute if score #teamReadyAqua var = #TURNREADY var run team join ready §nWolfsbane
 
 execute if score #teamReadyAqua var = #TURNNOTREADY var run tellraw @a[scores={triggerTeamReady=1},team=aqua] [{"text":"Not Ready aqua"}]
 execute if score #teamReadyAqua var = #TURNNOTREADY var run title @a[scores={triggerTeamReady=1},team=aqua] subtitle [{"text":"Not Ready aqua"}]
 execute if score #teamReadyAqua var = #TURNNOTREADY var run title @a[scores={triggerTeamReady=1},team=aqua] title ""
 execute if score #teamReadyAqua var = #TURNNOTREADY var run playsound entity.horse.armor master @a[scores={triggerTeamReady=1},team=aqua] ~ ~ ~ 1 1 1
+execute if score #teamReadyAqua var = #TURNNOTREADY var run team join notready §nWolfsbane
 
 # toggle
 execute if score #teamReadyAqua var = #TURNREADY var run scoreboard players operation #teamReadyAqua var = #READY var

@@ -17,6 +17,7 @@ tellraw @a[scores={triggerTeamJoin=1}] [{"text":"Joined Purple"}]
 title @a[scores={triggerTeamJoin=1}] subtitle [{"text":"Joined Purple"}]
 title @a[scores={triggerTeamJoin=1}] title ""
 playsound entity.horse.armor master @a[scores={triggerTeamJoin=1}] ~ ~ ~ 1 1 1
+scoreboard players set @a[scores={triggerTeamJoin=1}] sidebarDisplay 2
 
 # menu
 execute if score #menuHidden var = #FALSE var run tag @a[scores={triggerTeamJoin=1}] add menuRequest

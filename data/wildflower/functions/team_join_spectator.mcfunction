@@ -6,7 +6,7 @@
 #		wildflower:update
 
 
-team join grey @a[scores={triggerTeamJoin=3}]
+team join spectator @a[scores={triggerTeamJoin=3}]
 
 # items
 tag @a[scores={triggerTeamJoin=3}] add giveItems
@@ -17,6 +17,7 @@ tellraw @a[scores={triggerTeamJoin=3}] [{"text":"Joined Spectator"}]
 title @a[scores={triggerTeamJoin=3}] subtitle [{"text":"Joined Spectator"}]
 title @a[scores={triggerTeamJoin=3}] title ""
 playsound entity.horse.armor master @a[scores={triggerTeamJoin=3}] ~ ~ ~ 1 1 1
+scoreboard players set @a[scores={triggerTeamJoin=3}] sidebarDisplay 0
 
 # menu
 execute if score #menuHidden var = #FALSE var run tag @a[scores={triggerTeamJoin=3}] add menuRequest

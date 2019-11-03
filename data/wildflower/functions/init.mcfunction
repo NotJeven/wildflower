@@ -10,6 +10,8 @@ scoreboard objectives add sinceDeath minecraft.custom:minecraft.time_since_death
 
 scoreboard objectives add triggerTeamJoin trigger
 scoreboard objectives add triggerTeamReady trigger
+scoreboard objectives add sidebarDisplay dummy "Wildflower"
+scoreboard objectives setdisplay sidebar sidebarDisplay
 
 # CONSTANTS
 # game states
@@ -43,6 +45,9 @@ scoreboard players set #0 var 0
 # things to be only defined once
 scoreboard players operation #gameCountdownSecond var = #1 var
 scoreboard players operation #menuHidden var = #FALSE var
+scoreboard players set §nWolfsbane sidebarDisplay 5
+scoreboard players set §nFoxglove sidebarDisplay 3
+scoreboard players set §nSpectator sidebarDisplay 1
 
 
 # teams
@@ -52,9 +57,14 @@ team modify aqua prefix "Wolfsbane."
 team add purple "Foxglove"
 team modify purple color light_purple
 team modify purple prefix "Foxglove."
-team add grey "Spectator"
-team modify grey color gray
-team modify grey prefix "Spectator."
+team add spectator "Spectator"
+team modify spectator color gray
+team modify spectator prefix "Spectator."
+
+team add ready
+team modify ready color green
+team add notready
+team modify notready color red
 
 # initializes/sets all the variables
 function wildflower:var_set

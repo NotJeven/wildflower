@@ -13,3 +13,7 @@ scoreboard players operation #gameCountdown var = #15SECONDS var
 scoreboard players operation #resetCountdown var = #35SECONDS var
 scoreboard players operation #livesAqua var = #20 var
 scoreboard players operation #livesPurple var = #20 var
+
+team join ready §nSpectator
+team join notready §nWolfsbane
+team join notready §nFoxglove
