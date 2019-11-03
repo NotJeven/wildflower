@@ -52,6 +52,9 @@ team modify aqua prefix "Wolfsbane."
 team add purple "Foxglove"
 team modify purple color light_purple
 team modify purple prefix "Foxglove."
+team add grey "Spectator"
+team modify grey color gray
+team modify grey prefix "Spectator."
 
 # initializes/sets all the variables
 function wildflower:var_set

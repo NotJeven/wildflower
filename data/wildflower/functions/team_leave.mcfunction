@@ -21,4 +21,4 @@ execute if score #menuHidden var = #FALSE var run tag @a[scores={triggerTeamJoin
 execute if entity @a[tag=menuRequest] run function wildflower:menu
 
 
-scoreboard players set @a[scores={triggerTeamJoin=-1}] triggerTeam 0
+scoreboard players set @a[scores={triggerTeamJoin=-1}] triggerTeamJoin 0

@@ -16,11 +16,11 @@ execute if entity @a[scores={sinceDeath=1..},tag=dead] run function wildflower:a
 
 # Menu Requests
 
-tag @a[x=0.5,y=47,z=520.5,distance=0..1,tag=!menuRequest] add menuRequest
-execute if entity @a[x=0.5,y=47,z=520.5,distance=0..1,tag=menuRequest,tag=!menuTimeout] if score #menuHidden var = #FALSE var run function wildflower:menu
-execute if entity @a[x=0.5,y=47,z=520.5,distance=0..1,tag=menuRequest,tag=menuAdmin,tag=!menuTimeout] if score #menuHidden var = #TRUE var run function wildflower:menu_admin
-tag @a[x=0.5,y=47,z=520.5,distance=0..1,tag=menuRequest] add menuTimeout
-tag @a[x=0.5,y=47,z=520.5,distance=1..,tag=menuTimeout] remove menuTimeout
+tag @a[x=0,y=48,z=519,distance=0..1,tag=!menuRequest] add menuRequest
+execute if entity @a[x=0,y=48,z=519,distance=0..1,tag=menuRequest,tag=!menuTimeout] if score #menuHidden var = #FALSE var run function wildflower:menu
+execute if entity @a[x=0,y=48,z=519,distance=0..1,tag=menuRequest,tag=menuAdmin,tag=!menuTimeout] if score #menuHidden var = #TRUE var run function wildflower:menu_admin
+tag @a[x=0,y=48,z=519,distance=0..1] add menuTimeout
+tag @a[x=0,y=48,z=519,distance=1..,tag=menuTimeout] remove menuTimeout
 
 # Menu actions
 execute if entity @a[scores={triggerTeamJoin=-1}] run function wildflower:team_leave

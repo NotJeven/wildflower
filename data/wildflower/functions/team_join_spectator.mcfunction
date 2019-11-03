@@ -6,7 +6,7 @@
 #		wildflower:update
 
 
-team join spectator @a[scores={triggerTeamJoin=3}]
+team join grey @a[scores={triggerTeamJoin=3}]
 
 # items
 tag @a[scores={triggerTeamJoin=3}] add giveItems
