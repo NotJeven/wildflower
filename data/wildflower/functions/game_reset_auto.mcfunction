@@ -7,5 +7,5 @@
 
 tellraw @a {"translate":"wildflower.game.reset.auto"}
 
-scoreboard players operation #gameCountdown var = #30SECONDS var
-scoreboard players operation #gameCountdown var -= #1 var
+scoreboard players operation #resetCountdown var = #30SECONDS var
+scoreboard players operation #resetCountdown var -= #1 var
