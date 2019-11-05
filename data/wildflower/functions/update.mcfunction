@@ -42,13 +42,15 @@ execute if score #gameState var = #COUNTDOWN var if score #gameCountdown var < #
 execute if score #gameState var = #COUNTDOWN var if score #gameCountdown var < #0 var run function wildflower:game_start
 
 # game win condition
-execute if score #gamestate var = #RUNNING var run scoreboard players operation #livesPurple var -= @a[team=purple] deathCount
-execute if score #gamestate var = #RUNNING var run scoreboard players operation #livesAqua var -= @a[team=aqua] deathCount
+execute if score #gameState var = #RUNNING var run scoreboard players operation #livesPurple var = #20 var
+execute if score #gameState var = #RUNNING var run scoreboard players operation #livesAqua var = #20 var
+execute if score #gameState var = #RUNNING var run scoreboard players operation #livesPurple var -= @a[team=purple] deathCount
+execute if score #gameState var = #RUNNING var run scoreboard players operation #livesAqua var -= @a[team=aqua] deathCount
 execute if score #livesPurple var = #0 var if score #gameState var = #RUNNING var run function wildflower:game_end
 execute if score #livesAqua var = #0 var if score #gameState var = #RUNNING var run function wildflower:game_end
 
 # auto reset 
-execute if score #gameState var = #END var if score #resetCountdown var > #30SECONDS var run scoreboard players operation #resetCountdown var -= #1 var
-execute if score #gameState var = #END var if score #resetCountdown var = #30SECONDS var run function wildflower:game_reset_auto
-execute if score #gameState var = #END var if score #resetCountdown var < #30SECONDS var run function wildflower:game_reset_auto_tick
+execute if score #gameState var = #END var if score #resetCountdown var > #10SECONDS var run scoreboard players operation #resetCountdown var -= #1 var
+execute if score #gameState var = #END var if score #resetCountdown var = #10SECONDS var run function wildflower:game_reset_auto
+execute if score #gameState var = #END var if score #resetCountdown var < #10SECONDS var run function wildflower:game_reset_auto_tick
 execute if score #gameState var = #END var if score #resetCountdown var < #0 var run function wildflower:game_reset

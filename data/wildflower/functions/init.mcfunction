@@ -19,7 +19,7 @@ scoreboard objectives setdisplay sidebar sidebarDisplay
 # game states
 scoreboard players set #IDLE var 0
 scoreboard players set #COUNTDOWN var 1
-scoreboard players set #RUNNING	var 2
+scoreboard players set #RUNNING var 2
 scoreboard players set #END var 3
 
 # ready states
@@ -37,11 +37,12 @@ scoreboard players set #FALSE var 0
 scoreboard players set #15SECONDS var 300
 scoreboard players set #1SECOND var 20
 scoreboard players set #30SECONDS var 600
-scoreboard players set #35SECONDS var 700
+scoreboard players set #10SECONDS var 200
 
 # numbers
 scoreboard players set #1 var 1
 scoreboard players set #0 var 0
+scoreboard players set #20 var 20
 # END CONSTANTS
 
 # things to be only defined once
